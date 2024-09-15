@@ -61,7 +61,7 @@ is_between <- function(x, a, b) {
 #' rm_na(x)
 #' [1] 1 2 3
 rm_na <- function(x) {
-    return(NULL)
+    return(x[!is.na(x)])
 }
 
 #' Calculate the median of each row of a matrix
@@ -80,7 +80,7 @@ rm_na <- function(x) {
 #' [1] 1 4 7
 #' 
 row_medians <- function(x) {
-    return(NULL)
+    return(apply[x, 1 , na.rm = TRUE])
 }
 
 #' Evaluate each row of a matrix with a provided function
@@ -105,7 +105,7 @@ row_medians <- function(x) {
 #' summarize_rows(m, mean)
 #' [1] 2 5 8
 summarize_rows <- function(x, fn, na.rm=FALSE) {
-    return(NULL)
+    return(apply[x, 1, fn, na.rm = na.rm])
 }
 
 #' Summarize matrix rows into data frame
@@ -145,7 +145,15 @@ summarize_rows <- function(x, fn, na.rm=FALSE) {
 #' 3 -0.09040182 1.027559 -0.02774705 -3.026888 2.353087      130              54      0
 #' 4  0.09518138 1.030461  0.11294781 -3.409049 2.544992       90              72      0
 summarize_matrix <- function(x, na.rm=FALSE) {
-    return(NULL)
+    mean_values <- apply(x, 1, mean, na.rm = na.rm)
+    stdev_values <- apply(x, 1, sd, na.rm = na.rm)
+    median_values <- apply(x, 1, median, na.rm = na.rm)
+    min_values <- apply(x, 1, min, na.rm = na.rm)
+    max_values <- apply(x, 1, max, na.rm = na.rm)
+    num_lt_0 = apply(x, 1, function(row) sum(row < 0, na.rm = na.rm))
+    num_btw_1_and_5 = apply(x, 1 , function(row) sum(row > 1 & row < 5, na.rm = na.rm))
+    num_na = apply(x, 1, function(row) sum(is.na(row)))
+    return(summary_df)
 }
 
 # ------------ Helper Functions Used By Assignment, You May Ignore ------------
