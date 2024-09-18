@@ -80,10 +80,7 @@ rm_na <- function(x) {
 #' [1] 1 4 7
 #' 
 row_medians <- function(x) {
-    if (!is.matrix(x))    {
-        stop("Input must be a matrix")
-}
-    return(apply(x, 1 , fn, na.rm= na.rm))
+    return(apply(x, 1, median, na.rm = TRUE))
 }
 
 #' Evaluate each row of a matrix with a provided function
