@@ -18,7 +18,7 @@
 #' less_than_zero(c(-1,0,1,2,3,4))
 #' [1] TRUE FALSE FALSE FALSE FALSE FALSE
 less_than_zero <- function(x) {
-    return(x < 2) 
+    return(x < 0) 
 }
 
 #' Evaluate whether the argument is between two numbers
@@ -80,7 +80,7 @@ rm_na <- function(x) {
 #' [1] 1 4 7
 #' 
 row_medians <- function(x) {
-    return(apply(x, 1 , function(row) median(row, na.rm = TRUE)))
+    return(apply(x, 1 , fn, na.rm= na.rm))
 }
 
 #' Evaluate each row of a matrix with a provided function
@@ -105,7 +105,7 @@ row_medians <- function(x) {
 #' summarize_rows(m, mean)
 #' [1] 2 5 8
 summarize_rows <- function(x, fn, na.rm=FALSE) {
-    return(apply[x, 1, fn, na.rm = na.rm])
+    return(apply(x, 1, fn, na.rm = na.rm))
 }
 
 #' Summarize matrix rows into data frame
@@ -153,15 +153,6 @@ summarize_matrix <- function(x, na.rm=FALSE) {
     num_lt_0 = apply(x, 1, function(row) sum(row < 0, na.rm = na.rm))
     num_btw_1_and_5 = apply(x, 1 , function(row) sum(row > 1 & row < 5, na.rm = na.rm))
     num_na = apply(x, 1, function(row) sum(is.na(row)))
-summary_df <- data.frame(
-      mean = mean_values,
-      stdev = stdev_values,
-      median = median_values,
-      min = min_values,
-      max = max_values,
-      num_lt_0 = num_lt_0
-      num_btw_1_and_5 = num_btw_1_and_5,
-      num_na = num_na
 )    
 
     return(summary_df)
