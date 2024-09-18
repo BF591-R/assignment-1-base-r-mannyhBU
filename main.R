@@ -154,6 +154,17 @@ summarize_matrix <- function(x, na.rm=FALSE) {
     num_btw_1_and_5 = apply(x, 1 , function(row) sum(row > 1 & row < 5, na.rm = na.rm))
     num_na = apply(x, 1, function(row) sum(is.na(row)))
 
+    summary_df <- data.frame(
+      mean = mean_values,
+      stdev = stdev_values,
+      median = median_values,
+      min = min_values,
+      max = max_values,
+      num_lt_0 = num_lt_0,
+      num_btw_1_and_5 = num_btw_1_and_5,
+      num_na = num_na
+    )
+    
     return(summary_df)
 }
 
